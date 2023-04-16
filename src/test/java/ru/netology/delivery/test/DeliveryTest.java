@@ -25,8 +25,7 @@ class DeliveryTest {
         var daysToAddForSecondMeeting = 7;
         var secondMeetingDate = DataGenerator.generateDate(daysToAddForSecondMeeting);
         $("[data-test-id=city] input").sendKeys(validUser.getCity());
-        $("[data-test-id=date] input").sendKeys(Keys.CONTROL + "a");
-        $("[data-test-id=date] input").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").sendKeys(firstMeetingDate);
         $("[data-test-id=name] input").setValue(validUser.getName());
         $("[data-test-id=phone] input").setValue(validUser.getPhone());
@@ -35,8 +34,7 @@ class DeliveryTest {
         $(".notification__content")
                 .shouldHave(Condition.text("Встреча успешно запланирована на " + firstMeetingDate), Duration.ofSeconds(15))
                 .shouldBe(Condition.visible);
-        $("[data-test-id=date] input").sendKeys(Keys.COMMAND + "a");
-        $("[data-test-id=date] input").sendKeys(Keys.BACK_SPACE);
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").sendKeys(secondMeetingDate);
         $x("//*[contains(text(),'Запланировать')]").click();
         $("[data-test-id=replan-notification]")
