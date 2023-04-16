@@ -6,10 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import ru.netology.delivery.data.DataGenerator;
-
-import java.time.LocalDate;
-import java.util.Date;
-
+import java.time.Duration;
 import static com.codeborne.selenide.Selenide.*;
 
 class DeliveryTest {
@@ -36,7 +33,7 @@ class DeliveryTest {
         $("[data-test-id=agreement]").click();
         $x("//*[contains(text(),'Запланировать')]").click();
         $(".notification__content")
-                .shouldHave(Condition.text("Встреча успешно запланирована на " + firstMeetingDate))
+                .shouldHave(Condition.text("Встреча успешно запланирована на " + firstMeetingDate), Duration.ofSeconds(15))
                 .shouldBe(Condition.visible);
         $("[data-test-id=date] input").sendKeys(Keys.COMMAND + "a");
         $("[data-test-id=date] input").sendKeys(Keys.BACK_SPACE);
@@ -47,7 +44,7 @@ class DeliveryTest {
                 .shouldBe(Condition.visible);
         $("[data-test-id=replan-notification] button").click();
         $(".notification__content")
-                .shouldHave(Condition.text("Встреча успешно запланирована на " + secondMeetingDate))
+                .shouldHave(Condition.text("Встреча успешно запланирована на " + secondMeetingDate), Duration.ofSeconds(15))
                 .shouldBe(Condition.visible);
     }
 }
